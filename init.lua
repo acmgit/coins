@@ -18,6 +18,9 @@ coins.rev = 0
 coins.copper = 0
 coins.silver = 0  -- Number of coppercoins for 1 silver
 coins.gold = 0     -- Number of silvercoins for 1 gold
+coins.copper_ingot = "default:copper_ingot"
+coins.silver_ingot = "default:tin_ingot"
+coins.gold_ingot = "default:gold_ingot"
 
 coins.modname = "coins"
 
@@ -88,41 +91,133 @@ function coins.show(name)
     
 end -- coins.show
 
+function coins.ingot2coin(name, inventory, typ, coin_value)
+    local ingot
+    
+    if(typ == "copper") then
+            ingot = coins.copper_ingot
+            if(inventory:contains_item("main", ingot .. " " .. coin_value)) then
+                inventory:add_item("main", "coins:coin_" .. typ .. " " .. (coin_value * 5))
+                inventory:remove_item("main",ingot .. " " .. coin_value)
+                coins.copper = coins.copper + (coin_value * 5)
+                coins.show(name)
+              
+            else
+                coins.print_message(name, coltext(red,"You've not enough " .. ingot .. " in your inventory."))
+                                    
+            end -- if(inventory:contains_item
+            
+    elseif(typ == "silver") then
+            ingot = coins.silver_ingot
+            if(inventory:contains_item("main", ingot .. " " .. coin_value)) then
+                inventory:add_item("main", "coins:coin_" .. typ .. " " .. (coin_value * 5))
+                inventory:remove_item("main",ingot .. " " .. coin_value)
+                coins.silver = coins.silver + (coin_value * 5)
+                coins.show(name)
+              
+            else
+                coins.print_message(name, coltext(red,"You've not enough " .. ingot .. " in your inventory."))
+                                    
+            end -- if(inventory:contains_item
+            
+    elseif(typ == "gold") then
+            ingot = coins.gold_ingot
+            if(inventory:contains_item("main", ingot .. " " .. coin_value)) then
+                inventory:add_item("main", "coins:coin_" .. typ .. " " .. (coin_value * 5))
+                inventory:remove_item("main",ingot .. " " .. coin_value)
+                coins.gold = coins.gold + (coin_value * 5)
+                coins.show(name)
+              
+            else
+                coins.print_message(name, coltext(red,"You've not enough " .. ingot .. " in your inventory."))
+                                    
+            end -- if(inventory:contains_item
+                                   
+    else
+                                
+        coins.print_message(name, coltext(red, ingot .. " is'nt a valid metal for coins."))
+                            
+    end -- if(typ ==
+      
+end -- function ingot2coin
+      
+    
+function coins.coin2ingot(name, inventory, typ, coin_value)
+    
+    local ingot
+    local ingot_value = coin_value / 5
+    coin_value = ingot_value * 5
+    
+    if(typ == "copper") then
+            ingot = coins.copper_ingot
+            if(inventory:contains_item("main", "coins:coin_copper " .. coin_value)) then
+                inventory:add_item("main", ingot .. " " .. ingot_value)
+                inventory:remove_item("main","coins:coin_copper " .. coin_value)
+                coins.copper = coins.copper - coin_value
+                coins.show(name)
+              
+            else
+                coins.print_message(name, coltext(red,"You've not enough coins:coin_copper in your inventory."))
+                                    
+            end -- if(inventory:contains_item
+            
+    elseif(typ == "silver") then
+            ingot = coins.silver_ingot
+            if(inventory:contains_item("main", "coins:coin_silver " .. coin_value)) then
+                inventory:add_item("main", ingot .. " " .. ingot_value)
+                inventory:remove_item("main","coins:coin_silver " .. coin_value)
+                coins.silver = coins.silver - coin_value
+                coins.show(name)
+              
+            else
+                coins.print_message(name, coltext(red,"You've not enough coins:coin_silver in your inventory."))
+                                    
+            end -- if(inventory:contains_item
+            
+    elseif(typ == "gold") then
+            ingot = coins.gold_ingot
+            if(inventory:contains_item("main", "coins:coin_gold " .. coin_value)) then
+                inventory:add_item("main", ingot .. " " .. ingot_value)
+                inventory:remove_item("main","coins:coin_gold " .. coin_value)
+                coins.gold = coins.gold - coin_value
+                coins.show(name)
+              
+            else
+                coins.print_message(name, coltext(red,"You've not enough coins:coin_gold in your inventory."))
+                                    
+            end -- if(inventory:contains_item
+                                   
+    else
+                                
+        coins.print_message(name, coltext(red, ingot .. " is'nt a valid metal for coins."))
+                            
+    end -- if(typ ==
+
+end
+                           
 function coins.add(name, param)
     local mypara = {}
     mypara = coins.split(param)
-    local value = mypara[2] or 0
+    local coin_value = tonumber(mypara[2])
     local typ = string.lower(mypara[1]) or ""
     
-    if(value == 0) then 
-        coins.print_message(name, coltext(red, "No Coins added. Value was 0"))
+    if((coin_value == nil) or (coin_value <= 0)) then 
+        coins.print_message(name, coltext(red, "No Coins added. Value was less or 0"))
         return
         
-    end -- if(value
+    end -- if(coin_value
     
     if(typ == "copper" or typ == "silver" or typ == "gold") then
         local player = minetest.get_player_by_name(name)
         if(player ~= nil) then
             local pinv = player:get_inventory()
             if(pinv ~= nil) then
-                if(pinv:room_for_item("main", "coins:coin_".. typ .. " " .. value)) then
-                    pinv:add_item("main", "coins:coin_" .. typ .. " " .. value)
-                    coins.print_message(name, coltext(orange, value) .. coltext(green, " " .. mypara[1] .. " coins added."))
-                    if(typ == "copper") then
-                        coins.copper = coins.copper + value
-                        
-                    elseif(typ == "silver") then
-                        coins.silver = coins.silver + value
-                        
-                    else
-                        coins.gold = coins.gold + value
-                        
-                    end -- if(typ ==
-                    
+                if(pinv:room_for_item("main", "coins:coin_".. typ .. " " .. (coin_value * 5))) then
+                    coins.ingot2coin(name, pinv, typ, coin_value)
                     coins.save()
-               
-                else
-                    coins.print_message(name, coltext(green, "No Room for " .. coltext(orange, value) .. coltext(green, " Coppercoins in your Inventory.")))
+                                                            
+                else -- if(pinv:room_for_item()
+                    coins.print_message(name, coltext(green, "No Room for " .. coltext(orange, coin_value) .. coltext(green, " Coppercoins in your Inventory.")))
                                     
                 end -- if(pinv:room_for_item()
                                    
@@ -136,10 +231,68 @@ function coins.add(name, param)
     else
         coins.print_message(name, coltext(red, "Only copper, silver or gold allowed."))
         
-    end -- if(mypara[1]
+    end -- if(typ == 
                                
 end -- function coins.add()
+
+function coins.sub(name, param)
+    local mypara = {}
+    mypara = coins.split(param)
+    print("Values for mypara are: " .. mypara[1] .. " " .. mypara[2])
+    local coin_value = tonumber(mypara[2])
+    local typ = string.lower(mypara[1]) or ""
+    local ingot_value
+    
+    if((coin_value ~= nil) and (coin_value >= 5)) then
+        ingot_value = coin_value / 5
+        coin_value = ingot_value * 5
+        ingot_value = math.floor(ingot_value)
+        
+    else        
+        coins.print_message(name, coltext(red, "No Ingots added. Value was less than 5"))
+        return
+        
+    end -- if(coin_value
+    
+    local ingot
+    
+    if(typ == "copper") then
+        ingot = coins.copper_ingot
+        
+    elseif(typ == "silver") then
+        ingot = coins.silver_ingot
+        
+    elseif(typ == "gold") then
+        ingot = coins.gold_ingot
+        
+    else
+        coins.print_message(name, coltext(red, "Only copper, silver or gold allowed."))
+        return
+        
+    end -- if(typ ==
+        
+    local player = minetest.get_player_by_name(name)
+    if(player ~= nil) then
+        local pinv = player:get_inventory()
+        if(pinv ~= nil) then
+            if(pinv:room_for_item("main", ingot .. " " .. ingot_value)) then
+                coins.coin2ingot(name, pinv, typ, coin_value)
+                coins.save()
+                                                            
+            else -- if(pinv:room_for_item()
+                coins.print_message(name, coltext(green, "No Room for " .. coltext(orange, ingot_value) .. coltext(green, " Ingots in your Inventory.")))
+                                    
+            end -- if(pinv:room_for_item()
+                                   
+        else
+            coins.print_message(name, coltext(red, "No Inventory found."))
+                                
+        end -- if(pinv ~= nil
                                
+    end -- if(player ~= nil
+                    
+end -- function coins.sub()
+    
 --[[
    *********************************************
    ***             Chatcommands              ***
@@ -154,12 +307,22 @@ minetest.register_chatcommand("coins_show", {
 	end,
 })
 
-minetest.register_chatcommand("coins_add", {
+minetest.register_chatcommand("coins_mint", {
     privs = {coin_check = true},
     params = "<typ>, <value>",
-	description = "Add <value> <typ> coins to the game.",
+	description = "Mints <value> <typ> of Ingots in coins to the game.",
 	func = function(name, param)
 		coins.add(name, param)
+
+	end,
+})
+
+minetest.register_chatcommand("coins_melt", {
+    privs = {coin_check = true},
+    params = "<typ>, <value>",
+	description = "Melts <value> <typ> coins from in Ingots and removes it from the game.",
+	func = function(name, param)
+		coins.sub(name, param)
 
 	end,
 })
@@ -202,9 +365,15 @@ minetest.register_craftitem("coins:coin_gold", {
 
 --[[
    *********************************************
-   ***                Final Code             ***
+   ***                Startcode here         ***
    *********************************************
 ]]--
 
 coins.load()
-print("[MOD] " .. coins.modname .. " successfully loaded.")
+
+if minetest.get_modpath("moreores") then
+    coins.silver_ingot = "moreores:silver_ingot"
+    
+end
+
+minetest.log("info", "[MOD] " .. coins.modname .. " Version " .. coins.ver .. "." .. coins.rev .. " loaded.")
