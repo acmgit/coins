@@ -25,11 +25,9 @@ coins.gold_ingot = "default:gold_ingot"
 coins.modname = "coins"
 
 -- Colors for the Messages
-local log = 0
 local green = '#00FF00'
 local red = '#FF0000'
 local orange = '#FF6700'
-local none = 99
 
 local storage = minetest.get_mod_storage()  -- initalize storage file of this mod. This can only happen here and should be always local
 local cprint = minetest.chat_send_player
@@ -100,6 +98,8 @@ function coins.ingot2coin(name, inventory, typ, coin_value)
                 inventory:add_item("main", "coins:coin_" .. typ .. " " .. (coin_value * 5))
                 inventory:remove_item("main",ingot .. " " .. coin_value)
                 coins.copper = coins.copper + (coin_value * 5)
+                minetest.log("action", name .. " mints " .. coin_value * 5 .. " Coins of " .. typ .. ".")
+                minetest.log("action", "Now are " .. coins.copper .. " " .. typ .. "coins in the Game.")
                 coins.show(name)
               
             else
@@ -113,6 +113,8 @@ function coins.ingot2coin(name, inventory, typ, coin_value)
                 inventory:add_item("main", "coins:coin_" .. typ .. " " .. (coin_value * 5))
                 inventory:remove_item("main",ingot .. " " .. coin_value)
                 coins.silver = coins.silver + (coin_value * 5)
+                minetest.log("action", name .. " mints " .. coin_value * 5 .. " Coins of " .. typ .. ".")
+                minetest.log("action", "Now are " .. coins.silver .. " " .. typ .. "coins in the Game.")
                 coins.show(name)
               
             else
@@ -126,6 +128,8 @@ function coins.ingot2coin(name, inventory, typ, coin_value)
                 inventory:add_item("main", "coins:coin_" .. typ .. " " .. (coin_value * 5))
                 inventory:remove_item("main",ingot .. " " .. coin_value)
                 coins.gold = coins.gold + (coin_value * 5)
+                minetest.log("action", name .. " mints " .. coin_value * 5 .. " Coins of " .. typ .. ".")
+                minetest.log("action", "Now are " .. coins.gold .. " " .. typ .. "coins in the Game.")
                 coins.show(name)
               
             else
@@ -154,6 +158,8 @@ function coins.coin2ingot(name, inventory, typ, coin_value)
                 inventory:add_item("main", ingot .. " " .. ingot_value)
                 inventory:remove_item("main","coins:coin_copper " .. coin_value)
                 coins.copper = coins.copper - coin_value
+                minetest.log("action", name .. " melts " .. coin_value .. " Coins of " .. typ .. ".")
+                minetest.log("action", "Now are " .. coins.copper .. " " .. typ .. "coins in the Game.")
                 coins.show(name)
               
             else
@@ -167,6 +173,8 @@ function coins.coin2ingot(name, inventory, typ, coin_value)
                 inventory:add_item("main", ingot .. " " .. ingot_value)
                 inventory:remove_item("main","coins:coin_silver " .. coin_value)
                 coins.silver = coins.silver - coin_value
+                minetest.log("action", name .. " melts " .. coin_value .. " Coins of " .. typ .. ".")
+                minetest.log("action", "Now are " .. coins.silver .. " " .. typ .. "coins in the Game.")
                 coins.show(name)
               
             else
@@ -180,6 +188,8 @@ function coins.coin2ingot(name, inventory, typ, coin_value)
                 inventory:add_item("main", ingot .. " " .. ingot_value)
                 inventory:remove_item("main","coins:coin_gold " .. coin_value)
                 coins.gold = coins.gold - coin_value
+                minetest.log("action", name .. " melts " .. coin_value .. " Coins of " .. typ .. ".")
+                minetest.log("action", "Now are " .. coins.gold .. " " .. typ .. "coins in the Game.")
                 coins.show(name)
               
             else
