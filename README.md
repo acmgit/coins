@@ -12,7 +12,7 @@ have their own amount of coins and is managed under the admin and his or her tre
 
 ## Commands for all:
 
-/coins_show
+### /coins_show
 
 Shows for each kind of coin the amount on the server, NOT your own amount.
 
@@ -44,7 +44,7 @@ Add's 1 Silveringot in your Inventory and removes 5 Silvercoins from your Invent
 default
 
 ### optional:
-technic
+moreores
 
 ## Licence:
 LGPL 3.0
