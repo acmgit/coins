@@ -337,30 +337,36 @@ minetest.register_craftitem("coins:coin_copper", {
     description = "Copper Coin",
     inventory_image = "coins_coin_copper.png",
     groups = {currency = 1, not_in_creative_inventory=1, not_in_craft_guide=1},
+--[[   
     on_drop = function(itemstack, dropper, pos)
             return
                                                      
     end
+]]--
 })
         
 minetest.register_craftitem("coins:coin_silver", {
     description = "Silver Coin",
     inventory_image = "coins_coin_silver.png",
     groups = {currency = 1, not_in_creative_inventory=1, not_in_craft_guide=1},
+--[[                                                  
     on_drop = function(itemstack, dropper, pos)
             return
                                                      
     end
+]]--                                            
 })
     
 minetest.register_craftitem("coins:coin_gold", {
 	description = "Gold Coin",
 	inventory_image = "coins_coin_gold.png",
 	groups = {currency = 1, not_in_creative_inventory=1, not_in_craft_guide=1},
+--[[    
     on_drop = function(itemstack, dropper, pos)
             return
                                                      
     end
+]]--
 })
 
 --[[
