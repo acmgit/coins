@@ -203,6 +203,7 @@ function coins.add(name, param)
     
     if((coin_value == nil) or (coin_value <= 0)) then 
         coins.print_message(name, coltext(red, "No Coins added. Value was less or 0"))
+        coins.print_message(name, coltext(green, "Usage: coins_mint <typ> <value>"))
         return
         
     end -- if(coin_value
@@ -238,7 +239,6 @@ end -- function coins.add()
 function coins.sub(name, param)
     local mypara = {}
     mypara = coins.split(param)
-    print("Values for mypara are: " .. mypara[1] .. " " .. mypara[2])
     local coin_value = tonumber(mypara[2])
     local typ = string.lower(mypara[1]) or ""
     local ingot_value
@@ -250,6 +250,8 @@ function coins.sub(name, param)
         
     else        
         coins.print_message(name, coltext(red, "No Ingots added. Value was less than 5"))
+        coins.print_message(name, coltext(green, "Usage: coins_melt <typ> <value>"))
+        
         return
         
     end -- if(coin_value
