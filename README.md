@@ -28,13 +28,13 @@ You must have the type of Ingot in your Inventory.<br>
 Example:<br>
 /coins_mint silver 1<br>
 <br>
-Add's 5 Silvercoins to your server and in your inventory. After them you can spread in in your world.
+Add's 5 Silvercoins to your server and in removes 1 Silveringot from your inventory. After them you can spread the coins in in your world.
 
 ### /coins_melt \<type\> \<value\>
 
 Melts your \<value\> 
 Melts your \<value\> amount of \<type\> coins in \<type\> Ingots. Valid types are copper, silver or gold.
-5 Coins melts down to 1 Ingot. You must have the Coins in your Inventory to melt down.
+5 Coins melts down to 1 Ingot. You must have the Coins in your Inventory to melt down.<br>
 Example:<br>
 /coins_melt silver 5<br>
 <br>
