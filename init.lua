@@ -35,7 +35,7 @@ local storage = minetest.get_mod_storage()  -- initalize storage file of this mo
 local cprint = minetest.chat_send_player
 local coltext = core.colorize
 
-minetest.register_privilege("coin_check", "Player may add new or delete existing coins to the game.")
+minetest.register_privilege("coin_check", "Player may mints new conins to or melts existing coins from the game.")
 
 
 --[[
