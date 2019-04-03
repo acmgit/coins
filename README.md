@@ -24,20 +24,20 @@ Treasurer has the Privileg coin_check.
 
 Mints the \<value\> Ingots of \<type\> in coins. Valid types are copper, silver or gold.
 1 Ingot gives 5 Coins.
-You must have the type of Ingot in your Inventory.
-Example: 
-/coins_add silver 1
-
+You must have the type of Ingot in your Inventory.<br>
+Example:<br>
+/coins_mint silver 1<br>
+<br>
 Add's 5 Silvercoins to your server and in your inventory. After them you can spread in in your world.
 
 ### /coins_melt \<type\> \<value\>
 
 Melts your \<value\> 
 Melts your \<value\> amount of \<type\> coins in \<type\> Ingots. Valid types are copper, silver or gold.
-5 Coins melts down to 1 Ingot.
-Example: 
-/coins_melt silver 5
-
+5 Coins melts down to 1 Ingot. You must have the Coins in your Inventory to melt down.
+Example:<br>
+/coins_melt silver 5<br>
+<br>
 Add's 1 Silveringot in your Inventory and removes 5 Silvercoins from your Inventory and the Server.
 
 ## Depends:
