@@ -320,7 +320,7 @@ minetest.register_chatcommand("coins_mint", {
 minetest.register_chatcommand("coins_melt", {
     privs = {coin_check = true},
     params = "<typ>, <value>",
-	description = "Melts <value> <typ> coins from in Ingots and removes it from the game.",
+	description = "Melts <value> <typ> coins to Ingots and removes it from the game.",
 	func = function(name, param)
 		coins.sub(name, param)
 
