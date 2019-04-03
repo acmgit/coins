@@ -197,6 +197,12 @@ end
                            
 function coins.add(name, param)
     local mypara = {}
+    if((param == nil) or (param == "")) then
+        coins.print_message(name, coltext(green, "Usage: coins_mint <typ> <value>"))
+        return
+    
+    end --if(param
+
     mypara = coins.split(param)
     local coin_value = tonumber(mypara[2])
     local typ = string.lower(mypara[1]) or ""
@@ -238,6 +244,12 @@ end -- function coins.add()
 
 function coins.sub(name, param)
     local mypara = {}
+    if((param == nil) or (param == "")) then
+        coins.print_message(name, coltext(green, "Usage: coins_melt <typ> <value>"))
+        return
+    
+    end --if(param
+    
     mypara = coins.split(param)
     local coin_value = tonumber(mypara[2])
     local typ = string.lower(mypara[1]) or ""
