@@ -28,7 +28,7 @@ You must have the type of Ingot in your Inventory.<br>
 Example:<br>
 /coins_mint silver 1<br>
 <br>
-Add's 5 Silvercoins to your server and in removes 1 Silveringot from your inventory. After them you can spread the coins in in your world.
+Add's 5 Silvercoins to your server and in removes 1 Silveringot from your inventory. After them you can spread the coins in your world.
 
 ### /coins_melt \<type\> \<value\>
 
