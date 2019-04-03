@@ -20,9 +20,9 @@ Shows for each kind of coin the amount on the server, NOT your own amount.
 
 Treasurer has the Privileg coin_check.
 
-### /coins_add <type> <value>
+### /coins_add \<type\> \<value\>
 
-Add's the <value> amount of <type> coins. Valid types are copper, silver or gold.
+Add's the \<value\> amount of \<type\> coins. Valid types are copper, silver or gold.
 Example: 
 /coins_add silver 5
 
