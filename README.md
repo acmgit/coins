@@ -44,7 +44,7 @@ Add's 1 Silveringot in your Inventory and removes 5 Silvercoins from your Invent
 default
 
 ### optional:
-moreores
+moreores (for Silveringots, else it takes Tiningots from default)
 
 ## Licence:
 LGPL 3.0
