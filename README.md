@@ -12,9 +12,17 @@ have their own amount of coins and is managed under the admin and his or her tre
 
 ## Commands for all:
 
-### /coins_show
+### /coins_show coins | rate | all
 
+/coins_show coins
 Shows for each kind of coin the amount on the server, NOT your own amount.
+
+/coin_show rate
+Shows you the exchange-rate of silver or goldcoins and gives you the information
+if the rate is a fixed or dynamic rate.
+
+/coin_show all
+Executes first the command /coins_show coins and then /coins_show rate
 
 ## Commands for Admins and treasurer:
 
@@ -40,11 +48,22 @@ Example:<br>
 <br>
 Add's 1 Silveringot in your Inventory and removes 5 Silvercoins from your Inventory and the Server.
 
+### /coins_set \<typ\> \<value\>
+
+Set's your amount of \<typ\> coins to the amount of the \<value\>.
+Usefull if you have deleted some Coins without /coins_melt.
+This affects dynamic exchange-rates.
+
+### /coins_rate \<typ\> \<value\>
+
+Set's the exchange-rate of \<typ\> coins to \<value\>.
+Is the value more than 0, the exchange-rate is fix otherwise it's dynamic and depends on the amount of coins you have on the server.
+
 ## Depends:
 default
 
 ### optional:
-moreores (for Silveringots, else it takes Tiningots from default)
+moreores (for silver-.ingots, else it takes tin-ingots from default)
 
 ## Licence:
 LGPL 3.0
