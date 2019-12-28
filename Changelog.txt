@@ -1,0 +1,6 @@
+1.1:
+Added locale and translating strings.
+Added textdomain for german.
+
+1.0:
+Inital Commit

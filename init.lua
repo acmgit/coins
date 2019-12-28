@@ -10,11 +10,12 @@
 ]]--
 
 local MP = minetest.get_modpath(minetest.get_current_modname())
+local S = minetest.get_translator(minetest.get_current_modname())
 
 coins = {}
 
 coins.ver = 1
-coins.rev = 0
+coins.rev = 1
 coins.copper = 0
 coins.silver = 0  
 coins.gold = 0
@@ -35,7 +36,7 @@ local storage = minetest.get_mod_storage()  -- initalize storage file of this mo
 local cprint = minetest.chat_send_player
 local coltext = core.colorize
 
-minetest.register_privilege("coin_check", "Player may mints new conins to or melts existing coins from the game.")
+minetest.register_privilege("coin_check", S("Player may mints new conins to or melts existing coins from the game."))
 
 
 --[[
@@ -106,8 +107,8 @@ function coins.show(name, param)
         coins.show_rate(name)
         
     elseif((mypara[1] == nil) or (mypara[1] == "")) then
-        coins.print_message(name, coltext(red,"Unknown or no Parameter."))
-        coins.print_message(name, coltext(red,"Usage: ") .. coltext(orange,"coins_show <command>") ..  coltext(green, "."))
+        coins.print_message(name, coltext(red,S("Unknown or no Parameter.")))
+        coins.print_message(name, coltext(red,S("Usage: ")) .. coltext(orange,"/coins_show <command>") ..  coltext(green, "."))
         
     end
     
@@ -118,31 +119,31 @@ function coins.show_coin(name)
     local silver = coins.silver
     local gold = coins.gold
       
-    coins.print_message(name, coltext(green,"There are ") .. coltext(orange,copper) .. coltext(green, " coppercoins in the game."))
-    coins.print_message(name, coltext(green,"There are ") .. coltext(orange,silver) .. coltext(green, " silvercoins in the game."))
-    coins.print_message(name, coltext(green,"There are ") .. coltext(orange,gold) .. coltext(green, " goldcoins in the game."))
+    coins.print_message(name, coltext(green,S("There are ")) .. coltext(orange,copper) .. coltext(green, S(" coppercoins in the game.")))
+    coins.print_message(name, coltext(green,S("There are ")) .. coltext(orange,silver) .. coltext(green, S(" silvercoins in the game.")))
+    coins.print_message(name, coltext(green,S("There are ")) .. coltext(orange,gold) .. coltext(green, S(" goldcoins in the game.")))
       
 end --coins.show_coin
 
 function coins.show_rate(name)
     
     if(coins.silver_rate < 0) then
-        coins.print_message(name, coltext(green,"The rate of silvercoins is ") .. coltext(orange,"fix") .. coltext(green,"."))
-        coins.print_message(name, coltext(green,"The exchange-rate of " .. coltext(orange, 1) .. coltext(green," silvercoin is ") .. coltext(orange,coins.silver_rate * -1) .. coltext(green," coppercoins.")))
+        coins.print_message(name, coltext(green,S("The rate of silvercoins is ")) .. coltext(orange,S("fix")) .. coltext(green,"."))
+        coins.print_message(name, coltext(green,S("The exchange-rate of ") .. coltext(orange, 1) .. coltext(green,S(" silvercoin is ")) .. coltext(orange,coins.silver_rate * -1) .. coltext(green,S(" coppercoins."))))
         
     elseif(coins.silver_rate >= 0) then
-        coins.print_message(name, coltext(green,"The rate of silvercoins is ") .. coltext(orange,"dynamic") .. coltext(green,"."))
-        coins.print_message(name, coltext(green,"The exchange-rate of " .. coltext(orange, 1) .. coltext(green," silvercoin is ") .. coltext(orange,coins.silver_rate) .. coltext(green," coppercoins.")))
+        coins.print_message(name, coltext(green,S("The rate of silvercoins is ")) .. coltext(orange,S("dynamic")) .. coltext(green,"."))
+        coins.print_message(name, coltext(green,S("The exchange-rate of ") .. coltext(orange, 1) .. coltext(green,S(" silvercoin is ")) .. coltext(orange,coins.silver_rate) .. coltext(green,S(" coppercoins."))))
                 
     end -- if(coins.silver_rate
     
     if(coins.gold_rate < 0) then
-        coins.print_message(name, coltext(green,"The rate of goldcoins is ") .. coltext(orange,"fix") .. coltext(green,"."))
-        coins.print_message(name, coltext(green,"The exchange-rate of " .. coltext(orange, 1) .. coltext(green," goldcoin is ") .. coltext(orange,coins.gold_rate * -1) .. coltext(green," silvercoins.")))
+        coins.print_message(name, coltext(green,S("The rate of goldcoins is ")) .. coltext(orange,S("fix")) .. coltext(green,"."))
+        coins.print_message(name, coltext(green,S("The exchange-rate of ") .. coltext(orange, 1) .. coltext(green,S(" goldcoin is ")) .. coltext(orange,coins.gold_rate * -1) .. coltext(green,S(" silvercoins."))))
         
     elseif(coins.gold_rate >= 0) then
-        coins.print_message(name, coltext(green,"The rate of goldcoins is ") .. coltext(orange,"dynamic") .. coltext(green,"."))
-        coins.print_message(name, coltext(green,"The exchange-rate of " .. coltext(orange, 1) .. coltext(green," goldcoin is ") .. coltext(orange,coins.gold_rate) .. coltext(green," silvercoins.")))
+        coins.print_message(name, coltext(green,S("The rate of goldcoins is ")) .. coltext(orange,S("dynamic")) .. coltext(green,"."))
+        coins.print_message(name, coltext(green,S("The exchange-rate of ") .. coltext(orange, 1) .. coltext(green,S(" goldcoin is ")) .. coltext(orange,coins.gold_rate) .. coltext(green,S(" silvercoins."))))
                 
     end -- if(coins.silver_rate
     
@@ -165,7 +166,7 @@ function coins.set_rate(name, param)
     local myparam = {}
     
     if((param == nil) or (param == "")) then
-        coins.print_message(name, coltext(green,"Usage: /coins_rate " .. coltext(orange, "<typ> <value>") .. coltext(green,".")))
+        coins.print_message(name, coltext(green,S("Usage: /coins_rate ") .. coltext(orange, "<typ> <value>") .. coltext(green,".")))
         return
         
     end -- if(param == nil
@@ -177,26 +178,26 @@ function coins.set_rate(name, param)
     
     if((typ == "silver") and (value < 0)) then -- fix silverrate
         coins.silver_rate = value
-        coins.print_message(name, coltext(green, "Silverrate set fix to ") .. coltext(orange, value * -1) .. coltext(green, "."))
+        coins.print_message(name, coltext(green, S("Silverrate set fix to ")) .. coltext(orange, value * -1) .. coltext(green, "."))
         minetest.log("action", name .. " sets a fix rate for silver to " .. value * -1)
         
     elseif((typ == "silver") and (value >= 0)) then -- dynamic silverrate
         coins.silver_rate = 0
         coins.calculate_rate()
-        coins.print_message(name, coltext(green, "Silverrate set dynamic to ") .. coltext(orange, coins.silver_rate) .. coltext(green,"."))
+        coins.print_message(name, coltext(green, S("Silverrate set dynamic to ")) .. coltext(orange, coins.silver_rate) .. coltext(green,"."))
         minetest.log("action", name .. " sets a dynamic rate for silver to " .. coins.silver_rate)
         
     end -- if(typ == "silver"
 
     if((typ == "gold") and (value < 0)) then -- fix goldrate
         coins.gold_rate = value
-        coins.print_message(name, coltext(green, "Goldrate set fix to " .. coltext(orange, value * -1)))
+        coins.print_message(name, coltext(green, S("Goldrate set fix to ") .. coltext(orange, value * -1)))
         minetest.log("action", name .. " sets a fix rate for gold to " .. value * -1)
         
     elseif((typ == "gold") and (value >= 0)) then -- dynamic goldrate
         coins.gold_rate = 0
         coins.calculate_rate()
-        coins.print_message(name, coltext(green, "Goldrate set dynamic to ") .. coltext(orange, coins.gold_rate) .. coltext(green,"."))
+        coins.print_message(name, coltext(green, S("Goldrate set dynamic to ")) .. coltext(orange, coins.gold_rate) .. coltext(green,"."))
         minetest.log("action", name .. " sets a dynamic rate for gold to " .. coins.gold_rate)
         
     end -- if(typ == "silver"
@@ -219,7 +220,7 @@ function coins.ingot2coin(name, inventory, typ, coin_value)
                 coins.show(name, "coins")
                 
             else
-                coins.print_message(name, coltext(red,"You've not enough " .. ingot .. " in your inventory."))
+                coins.print_message(name, coltext(red,S("You've not enough ") .. ingot .. S(" in your inventory.")))
                                     
             end -- if(inventory:contains_item
             
@@ -234,7 +235,7 @@ function coins.ingot2coin(name, inventory, typ, coin_value)
                 coins.show(name, "coins")
               
             else
-                coins.print_message(name, coltext(red,"You've not enough " .. ingot .. " in your inventory."))
+                coins.print_message(name, coltext(red,S("You've not enough ") .. ingot .. S(" in your inventory.")))
                                     
             end -- if(inventory:contains_item
             
@@ -249,13 +250,13 @@ function coins.ingot2coin(name, inventory, typ, coin_value)
                 coins.show(name, "coins")
               
             else
-                coins.print_message(name, coltext(red,"You've not enough " .. ingot .. " in your inventory."))
+                coins.print_message(name, coltext(red,S("You've not enough ") .. ingot .. S(" in your inventory.")))
                                     
             end -- if(inventory:contains_item
                                    
     else
                                 
-        coins.print_message(name, coltext(red, ingot .. " is'nt a valid metal for coins."))
+        coins.print_message(name, coltext(red, ingot .. S(" is'nt a valid metal for coins.")))
                             
     end -- if(typ ==
     
@@ -278,7 +279,7 @@ function coins.coin2ingot(name, inventory, typ, coin_value)
                 minetest.log("action", "Now are " .. coins.copper .. " " .. typ .. "coins in the Game.")
               
             else
-                coins.print_message(name, coltext(red,"You've not enough ") .. coltext(orange, "coins:coin_copper") .. coltext(red," in your inventory."))
+                coins.print_message(name, coltext(red,S("You've not enough ")) .. coltext(orange, "coins:coin_copper") .. coltext(red,S(" in your inventory.")))
                                     
             end -- if(inventory:contains_item
             
@@ -292,7 +293,7 @@ function coins.coin2ingot(name, inventory, typ, coin_value)
                 minetest.log("action", "Now are " .. coins.silver .. " " .. typ .. "coins in the Game.")
               
             else
-                coins.print_message(name, coltext(red,"You've not enough ") .. coltext(orange, "coins:coin_silver") .. coltext(red," in your inventory."))
+                coins.print_message(name, coltext(red,S("You've not enough ")) .. coltext(orange, "coins:coin_silver") .. coltext(red,S(" in your inventory.")))
                                     
             end -- if(inventory:contains_item
             
@@ -306,13 +307,13 @@ function coins.coin2ingot(name, inventory, typ, coin_value)
                 minetest.log("action", "Now are " .. coins.gold .. " " .. typ .. "coins in the Game.")
               
             else
-                coins.print_message(name, coltext(red,"You've not enough ") .. coltext(orange, "coins:coin_gold") .. coltext(red," in your inventory."))
+                coins.print_message(name, coltext(red,S("You've not enough ")) .. coltext(orange, "coins:coin_gold") .. coltext(red,S(" in your inventory.")))
                                     
             end -- if(inventory:contains_item
                                    
     else
                                 
-        coins.print_message(name, coltext(red, ingot .. " is'nt a valid metal for coins."))
+        coins.print_message(name, coltext(red, ingot .. S(" is'nt a valid metal for coins.")))
                             
     end -- if(typ ==
 
@@ -321,7 +322,7 @@ end -- coin2ingot()
 function coins.add(name, param)
     local mypara = {}
     if((param == nil) or (param == "")) then
-        coins.print_message(name, coltext(green, "Usage: /coins_mint") .. coltext(orange, "<typ> <value>"))
+        coins.print_message(name, coltext(green, S("Usage: /coins_mint ")) .. coltext(orange, "<typ> <value>"))
         return
     
     end --if(param
@@ -331,8 +332,8 @@ function coins.add(name, param)
     local typ = string.lower(mypara[1]) or ""
     
     if((coin_value == nil) or (coin_value <= 0)) then 
-        coins.print_message(name, coltext(red, "No Coins added. Value was less or 0"))
-        coins.print_message(name, coltext(green, "Usage: /coins_mint ") .. coltext(orange, "<typ> <value>"))
+        coins.print_message(name, coltext(red, S("No Coins added. Value was less or 0")))
+        coins.print_message(name, coltext(green, S("Usage: /coins_mint ")) .. coltext(orange, "<typ> <value>"))
         return
         
     end -- if(coin_value
@@ -347,19 +348,19 @@ function coins.add(name, param)
                     coins.save()
                                                             
                 else -- if(pinv:room_for_item()
-                    coins.print_message(name, coltext(green, "No Room for " .. coltext(orange, coin_value) .. coltext(green, " Coppercoins in your Inventory.")))
+                    coins.print_message(name, coltext(green, S("No Room for ") .. coltext(orange, coin_value) .. coltext(green, S(" Coppercoins in your Inventory."))))
                                     
                 end -- if(pinv:room_for_item()
                                    
             else
-                coins.print_message(name, coltext(red, "No Inventory found."))
+                coins.print_message(name, coltext(red, S("No Inventory found.")))
                                 
             end -- if(pinv ~= nil
                                
         end -- if(player ~= nil
             
     else
-        coins.print_message(name, coltext(red, "Only copper, silver or gold allowed."))
+        coins.print_message(name, coltext(red, S("Only copper, silver or gold allowed.")))
         
     end -- if(typ == 
                                
@@ -368,7 +369,7 @@ end -- function coins.add()
 function coins.set(name, param)
     local mypara = {}
     if((param == nil) or (param == "")) then
-        coins.print_message(name, coltext(green, "Usage: coins_set ") .. coltext(orange, "<typ> <value>"))
+        coins.print_message(name, coltext(green, S("Usage: /coins_set ")) .. coltext(orange, "<typ> <value>"))
         return
     
     end --if(param
@@ -378,27 +379,27 @@ function coins.set(name, param)
     
     if(mypara[1] == "copper") then
         coins.copper = coin_value
-        coins.print_message(name, coltext(green, "Coppercoins set to ") .. coltext(orange, coin_value) .. coltext(green, " Coins."))
+        coins.print_message(name, coltext(green, S("Coppercoins set to ")) .. coltext(orange, coin_value) .. coltext(green, S(" Coins.")))
         minetest.log("action", name .. " sets Coppercoins to " .. coin_value .. " Coins.")
         coins.save()
         coins.show("all")
         
     elseif(mypara[1] == "silver") then
         coins.silver = coin_value
-        coins.print_message(name, coltext(green, "Silvercoins set to ") .. coltext(orange, coin_value) .. coltext(green, " Coins."))
+        coins.print_message(name, coltext(green, S("Silvercoins set to ")) .. coltext(orange, coin_value) .. coltext(green, S(" Coins.")))
         minetest.log("action", name .. " sets Silvercoins to " .. coin_value .. " Coins.")
         coins.save()
         coins.show("all")
         
     elseif(mypara[1] == "gold") then
         coins.gold = coin_value
-        coins.print_message(name, coltext(green, "Goldcoins set to ") .. coltext(orange, coin_value) .. coltext(green, " Coins."))
+        coins.print_message(name, coltext(green, S("Goldcoins set to ")) .. coltext(orange, coin_value) .. coltext(green, S(" Coins.")))
         minetest.log("action", name .. " sets Goldcoins to " .. coin_value .. " Coins.")
         coins.save()
         coins.show("all")
     
     else
-        coins.print_message(name, coltext(red, "Unknown typ of coins to set."))
+        coins.print_message(name, coltext(red, S("Unknown typ of coins to set.")))
         
     end -- if(mypara[
 
@@ -407,7 +408,7 @@ end -- coins.set(
 function coins.sub(name, param)
     local mypara = {}
     if((param == nil) or (param == "")) then
-        coins.print_message(name, coltext(green, "Usage: coins_melt ") .. coltext(orange, "<typ> <value>"))
+        coins.print_message(name, coltext(green, S("Usage: /coins_melt ")) .. coltext(orange, "<typ> <value>"))
         return
     
     end --if(param
@@ -423,8 +424,8 @@ function coins.sub(name, param)
         ingot_value = math.floor(ingot_value)
         
     else        
-        coins.print_message(name, coltext(red, "No Ingots added. Value was less than 5"))
-        coins.print_message(name, coltext(green, "Usage: coins_melt <typ> <value>"))
+        coins.print_message(name, coltext(red, S("No Ingots added. Value was less than 5")))
+        coins.print_message(name, coltext(green, S("Usage: /coins_melt <typ> <value>")))
         
         return
         
@@ -442,7 +443,7 @@ function coins.sub(name, param)
         ingot = coins.gold_ingot
         
     else
-        coins.print_message(name, coltext(red, "Only copper, silver or gold allowed."))
+        coins.print_message(name, coltext(red, S("Only copper, silver or gold allowed.")))
         return
         
     end -- if(typ ==
@@ -456,12 +457,12 @@ function coins.sub(name, param)
                 coins.save()
                                                             
             else -- if(pinv:room_for_item()
-                coins.print_message(name, coltext(green, "No Room for " .. coltext(orange, ingot_value) .. coltext(green, " Ingots in your Inventory.")))
+                coins.print_message(name, coltext(green, S("No Room for ") .. coltext(orange, ingot_value) .. coltext(green, S(" Ingots in your Inventory."))))
                                     
             end -- if(pinv:room_for_item()
                                    
         else
-            coins.print_message(name, coltext(red, "No Inventory found."))
+            coins.print_message(name, coltext(red, S("No Inventory found.")))
                                 
         end -- if(pinv ~= nil
                                
@@ -477,7 +478,7 @@ end -- function coins.sub()
 
 minetest.register_chatcommand("coins_show", {
     param = "<command>",
-	description = "\n<rate> | Shows the rate of the coins.\n<coins> | Shows the number of the coins.\n<all> | Shows rate and number of coins.",
+	description = "\n<rate> | " .. S("Shows the rate of the coins.") .. "\n<coins> | " .. S("Shows the number of the coins.") .. "\n<all> | " .. S("Shows rate and number of coins."),
 	func = function(name, param)
 		coins.show(name, param)
 
@@ -487,7 +488,7 @@ minetest.register_chatcommand("coins_show", {
 minetest.register_chatcommand("coins_mint", {
     privs = {coin_check = true},
     params = "<typ>, <value>",
-	description = "Mints <value> <typ> of Ingots in coins to the game.",
+	description = S("Mints <value> <typ> of Ingots in coins to the game."),
 	func = function(name, param)
 		coins.add(name, param)
 
@@ -497,7 +498,7 @@ minetest.register_chatcommand("coins_mint", {
 minetest.register_chatcommand("coins_melt", {
     privs = {coin_check = true},
     params = "<typ>, <value>",
-	description = "Melts <value> <typ> coins to Ingots and removes it from the game.",
+	description = S("Melts <value> <typ> coins to Ingots and removes it from the game."),
 	func = function(name, param)
 		coins.sub(name, param)
 
@@ -507,7 +508,7 @@ minetest.register_chatcommand("coins_melt", {
 minetest.register_chatcommand("coins_set", {
     privs = {coin_check = true},
     params = "copper <value>| silver <value>| gold <value>",
-	description = "\ncopper <value> - Set's number of coppercoins.\nsilver <value> - Set's number of silvercoins.\ngold <value> - Set's number of goldcoins.",
+	description = "\n" .. S("copper <value> - Set's number of coppercoins.") .. "\n" .. S("silver <value> - Set's number of silvercoins.") .. "\n" .. S("gold <value> - Set's number of goldcoins."),
 	func = function(name, param)
         coins.set(name, param)
 
@@ -516,8 +517,8 @@ minetest.register_chatcommand("coins_set", {
 
 minetest.register_chatcommand("coins_rate", {
     privs = {coin_check = true},
-    params = "silver <value>| gold <value>",
-	description = "\nsilver <value> - Set's rate for silvercoins.\ngold <value> - Set's the rate for goldcoins.",
+    params = "silver <rate>| gold <rate>",
+	description = "\n" .. S("silver <rate> - Set's rate for silvercoins.") .. "\n" .. S("gold <rate> - Set's the rate for goldcoins."),
 	func = function(name, param)
         coins.set_rate(name, param)
 
