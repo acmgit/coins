@@ -1,6 +1,7 @@
 1.1:
 Added locale and translating strings.
 Added textdomain for german.
+Stacksize changed to 30.000
 
 1.0:
 Inital Commit
