@@ -1,56 +1,71 @@
 # textdomain: coins
-Player may mints new coins to or melts existing coins from the game.=Spieler dürfen neue Münzen prägen oder vorhandene Münzen im Spiel einschmelzen.
-Unknown or no Parameter.=Unbekannter oder kein Parameter.
-Usage: =Benutzung: 
-There are =Es sind 
+
+
+### init.lua ###
+
+ Coins.= Münzen.
+ Coppercoins in your Inventory.= Kupfermünzen in deinem Inventar
+ Ingots in your Inventory.=
  coppercoins in the game.= Kupfermünzen im Spiel.
- silvercoins in the game.= Silbermünzen im Spiel.
- goldcoins in the game.= Goldmünzen im Spiel.
-The rate of silvercoins is =Der Kurs für Silbermünzen ist 
-The exchange-rate of =Der Wechselkurs von 
-fix=fest
- silvercoin is = Silbermünzen ist 
  coppercoins.= Kupfermünzen.
- silvercoins.= Silbermünzen.
-The rate of goldcoins is =Der Kurs für Goldmünzen ist 
-The exchange-rate of =Der Wechselkurs von 
  goldcoin is = Goldmünzen ist 
-dynamic=dynamisch
-Usage: /coins_rate =Benutzung: /coins_rate 
-Silverrate set fix to =Silberkurs festgelegt auf 
-Silverrate set dynamic to =Silberkurs dynamisch gesetzt auf 
-Goldrate set fix to =Goldkurs festgelegt auf 
-Goldrate set dynamic to =Goldkurs dynamisch gesetzt auf 
-You've not enough = Du hast nicht genug 
+ goldcoins in the game.= Goldmünzen im Spiel.
  in your inventory.= in deinem Inventar
  is'nt a valid metal for coins.= ist kein gültiges Metall zum Prägen von Münzen.
-Usage: /coins_mint =Benutzung /coins_mint 
-No Coins added. Value was less or 0=Keine Münzen hinzugefügt. Die Anzahl war weniger oder 0
-No Room for =Kein Platz für 
- Coppercoins in your Inventory.= Kupfermünzen in deinem Inventar
-No Inventory found.=Kein Inventar gefunden.
-Only copper, silver or gold allowed.=Nur Kupfer, Silber oder Gold erlaubt.
-Usage: /coins_set =Benutzung /coins_set 
+ silvercoin is = Silbermünzen ist 
+ silvercoins in the game.= Silbermünzen im Spiel.
+ silvercoins.= Silbermünzen.
 Coppercoins set to =Kupfermünzen gesetzt auf 
-Silvercoins set to =Silbermünzen gesetzt auf 
 Goldcoins set to =Goldmünzen gesetzt auf 
- Coins.= Münzen.
-Unknown typ of coins to set.=Unbekannter Münztyp zum setzen.
-Usage: /coins_melt =Benutzung: /coins_melt 
-No Ingots added. Value was less than 5=Kein Barren hinzugefügt. Die Anzahl war weniger als 5
-Usage: /coins_melt <typ> <value>=Benutzung /coins_melt <typ> <wert>
-Shows the rate of the coins.=Zeigt den Kurs für die Münzen.
-Shows the number of the coins.=Zeigt die Anzahl an Münzen.
-Shows rate and number of coins.=Zeigt Wechselkurs und Anzahl der Münzen.
-Mints <value> <typ> of Ingots in coins to the game.=Prägt <wert> <typ> an Barren zu Münzen für das Spiel.
+Goldrate set dynamic to =Goldkurs dynamisch gesetzt auf 
+Goldrate set fix to =Goldkurs festgelegt auf 
+
 Melts <value> <typ> coins to Ingots and removes it from the game.=Schmilzt <anzahl> <typ> Münzen zu Barren und entfernt sie aus dem Spiel.
-Set's number of coppercoins.=Setzt die Anzahl von Kupfermünzen.
+
+Mints <value> <typ> of Ingots in coins to the game.=Prägt <wert> <typ> an Barren zu Münzen für das Spiel.
+No Coins added. Value was less or 0=Keine Münzen hinzugefügt. Die Anzahl war weniger oder 0
+No Ingots added. Value was less than 5=Kein Barren hinzugefügt. Die Anzahl war weniger als 5
+No Inventory found.=Kein Inventar gefunden.
+No Room for =Kein Platz für 
+Only copper, silver or gold allowed.=Nur Kupfer, Silber oder Gold erlaubt.
+
+Player may mints new conins to or melts existing coins from the game.=
+
+Shows rate and number of coins.=Zeigt Wechselkurs und Anzahl der Münzen.
+Shows the number of the coins.=Zeigt die Anzahl an Münzen.
+Shows the rate of the coins.=Zeigt den Kurs für die Münzen.
+Silvercoins set to =Silbermünzen gesetzt auf 
+Silverrate set dynamic to =Silberkurs dynamisch gesetzt auf 
+Silverrate set fix to =Silberkurs festgelegt auf 
+The exchange-rate of =Der Wechselkurs von 
+The rate of goldcoins is =Der Kurs für Goldmünzen ist 
+The rate of silvercoins is =Der Kurs für Silbermünzen ist 
+There are =Es sind 
+Unknown or no Parameter.=Unbekannter oder kein Parameter.
+Unknown typ of coins to set.=Unbekannter Münztyp zum setzen.
+Usage: =Benutzung: 
+Usage: /coins_melt =Benutzung: /coins_melt 
+Usage: /coins_melt <typ> <value>=Benutzung /coins_melt <typ> <wert>
+Usage: /coins_mint =Benutzung /coins_mint 
+Usage: /coins_rate =Benutzung: /coins_rate 
+Usage: /coins_set =Benutzung /coins_set 
+You've not enough = Du hast nicht genug 
 copper <value> - Set's number of coppercoins.=copper <anzahl> - Setzt die Anzahl an Kupfermünzen fest.
-silver <value> - Set's number of silvercoins.=silver <anzahl> - Setzt die Anzahl an Silbermünzen fest.
+dynamic=dynamisch
+fix=fest
+gold <rate> - Set's the rate for goldcoins.=gold <Kurs> - Setzt den Wechselkurs für Goldmünzen fest.
 gold <value> - Set's number of goldcoins.=gold <anzahl> - Setzt die Anzahl an Goldmünzen fest.
 silver <rate> - Set's rate for silvercoins.=silver <Kurs> - Setzt den Wechselkurs für Silbermünzen fest.
-gold <rate> - Set's the rate for goldcoins.=gold <Kurs> - Setzt den Wechselkurs für Goldmünzen fest.
+silver <value> - Set's number of silvercoins.=silver <anzahl> - Setzt die Anzahl an Silbermünzen fest.
+
+
+##### not used anymore #####
+
+
+# textdomain: coins
+Player may mints new coins to or melts existing coins from the game.=Spieler dürfen neue Münzen prägen oder vorhandene Münzen im Spiel einschmelzen.
+
+Set's number of coppercoins.=Setzt die Anzahl von Kupfermünzen.
 Copper Coin=Kupfermünze
 Silver Coin=Silbermünze
 Gold Coin=Goldmünze
-

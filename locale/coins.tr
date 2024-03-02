@@ -1,0 +1,59 @@
+# textdomain: coins
+
+
+### init.lua ###
+
+ Coins.=
+ Coppercoins in your Inventory.=
+ Ingots in your Inventory.=
+ coppercoins in the game.=
+ coppercoins.=
+ goldcoin is =
+ goldcoins in the game.=
+ in your inventory.=
+ is'nt a valid metal for coins.=
+ silvercoin is =
+ silvercoins in the game.=
+ silvercoins.=
+Coppercoins set to =
+Goldcoins set to =
+Goldrate set dynamic to =
+Goldrate set fix to =
+
+Melts <value> <typ> coins to Ingots and removes it from the game.=
+
+Mints <value> <typ> of Ingots in coins to the game.=
+No Coins added. Value was less or 0=
+No Ingots added. Value was less than 5=
+No Inventory found.=
+No Room for =
+Only copper, silver or gold allowed.=
+
+Player may mints new conins to or melts existing coins from the game.=
+
+Shows rate and number of coins.=
+Shows the number of the coins.=
+Shows the rate of the coins.=
+Silvercoins set to =
+Silverrate set dynamic to =
+Silverrate set fix to =
+The exchange-rate of =
+The rate of goldcoins is =
+The rate of silvercoins is =
+There are =
+Unknown or no Parameter.=
+Unknown typ of coins to set.=
+Usage: =
+Usage: /coins_melt =
+Usage: /coins_melt <typ> <value>=
+Usage: /coins_mint =
+Usage: /coins_rate =
+Usage: /coins_set =
+You've not enough =
+copper <value> - Set's number of coppercoins.=
+dynamic=
+fix=
+gold <rate> - Set's the rate for goldcoins.=
+gold <value> - Set's number of goldcoins.=
+silver <rate> - Set's rate for silvercoins.=
+silver <value> - Set's number of silvercoins.=
